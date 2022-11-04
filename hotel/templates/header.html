@@ -1,0 +1,94 @@
+{% load sample_tags %}
+{% load static %}
+
+<!-- Login and Register header section -->
+    <div id="register">
+        <div class="container-fluid">
+            <div class="container register ">
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user_profile' %}">Profile</a>
+                    <a href="{% url 'cartpage' %}"><i class="fas fa-shopping-cart"></i></a> 	
+                    <a href="{% url 'foodcart' %}"><i class="fas fa-utensils"></i></a>
+                    <a href="{% url 'logoutt' %}">Logout</a>
+                    <a class="light"><i class="fas fa-moon"></i></a>
+                    {% else %}
+                    <a href="{% url 'signin' %}">Login <i class="fas fa-sign-in-alt"></i></a>
+                    <a href="{% url 'register' %}">Register</a>                    
+                    <a class="light"><i class="fas fa-moon"></i></a>
+                {% endif %}
+                    
+            </div>
+        </div>
+    </div>
+<!-- Login and Register header section done-->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <a class="navbar-brand" href="{% url 'index' %}"> <strong>DOLLY HOTEL</strong> </a>
+    {% comment %} <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static '' %}img/logo1.png" alt=""></a> {% endcomment %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-align-justify text-dark"></i>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">HOME</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  HOTEL & SUITES
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                    
+                    {% if varieties %}
+                        {% for vr in varieties %}
+                            <a class="dropdown-item" href="{% url 'variety' vr.id vr.slug %}"></i>{{vr.name|title}}</b></a>
+                        {% endfor %}
+                    {% endif %}                        
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'rooms' %}">ROOMS</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                DINNING
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'skyrestuarant' %}">SKY RESTUARANT</a>
+                <a class="dropdown-item" href="{% url 'crossroadrestuarant' %}">CROSSROADS RESTAURANT</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                MEETINGS & EVENTS
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'grandballroom' %}">GRAND BALL ROOM</a>
+                <a class="dropdown-item" href="{% url 'meetingroom' %}">MEETING ROOM</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                RECREATIONAL SERVICES
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'swimmingpool' %}">SWIMMING POOL</a>
+                <a class="dropdown-item" href="{% url 'gym' %}">GYM</a>
+                <a class="dropdown-item" href="{% url 'basketballcourt' %}">BASKETBALL COURT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'meals' %}">FOOD MENU</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% if messages %}
+  {% for item in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="container">
+        <p>{{item}}</p>
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+{% endif %}

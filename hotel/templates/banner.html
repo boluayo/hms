@@ -1,0 +1,17 @@
+{% load sample_tags %}
+    
+    
+<!-- Banner section -->
+<div class="container-fluid" id="banner">
+    <div class="container banner">
+        <!-- <h1>WE GIVE YOU EVERYTHING <br> RIGHT HERE, WHERE YOU NEED IT.</h1> -->
+        <!-- <h4 class="pb-3">Make your stay memorable.</h4> -->
+        {% for content in bannercontent %}
+            <h1>{{content.text}}</h1>
+            <h4 class="pb-3">{{content.slogan}}</h4>
+        {% endfor %}
+        <button class="edit-profile" style="padding: 1rem; margin-right:1rem;"><a href="{% url 'rooms' %}" class="edit-profile text-white">Our Rooms</a></button>
+        <button class="edit-profile" style="padding: 1rem; margin-right:1rem;"><a href="{% intralink 'index' 'contact-form' %}" class="edit-profile text-white">Contact Us</a></button>
+    </div>
+</div>
+<!-- Banner section done -->
