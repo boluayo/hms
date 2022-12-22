@@ -217,7 +217,7 @@ def addtocart(request):
                 newitem.check_out = checkout
                 newitem.order_no = cart_code
                 newitem.item_paid = False
-                if checkout < checkin:
+                if newitem.check_out < newitem.check_in:
                     messages.error(request, 'invalid date!')
                 else:
                     newitem.save()
@@ -232,7 +232,7 @@ def addtocart(request):
             newcart.check_out = checkout
             newcart.order_no = cart_code
             newcart.item_paid = False
-            if checkout < checkin:
+            if newcart.check_out < newcart.check_in:
                 messages.error(request, 'invalid date!')
             else:
                 newcart.save()
